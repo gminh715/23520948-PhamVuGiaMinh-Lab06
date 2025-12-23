@@ -186,3 +186,23 @@ export async function getDocumentBySlug(slug: string) {
 
     return result.rows;
 }
+
+// Insert a new document chunk into the database
+export async function insertDocumentChunk(
+    title: string,
+    content: string,
+    slug: string,
+    section: string,
+    embedding: number[]
+): Promise<void> {
+    return retryDatabaseQuery(async () => {
+        const pool = getPool();
+        const embeddingStr = `[${embedding.join(',')}]`;
+
+        await pool.query(
+            `INSERT INTO document_chunks (title, content, slug, section, embedding)
+            VALUES ($1, $2, $3, $4, $5::vector)`,
+            [title, content, slug, section, embeddingStr]
+        );
+    });
+}
