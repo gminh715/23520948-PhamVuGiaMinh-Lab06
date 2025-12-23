@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 15, 23, 42;
+    --background-start-rgb: 248, 250, 252;
+    --background-end-rgb: 241, 245, 249;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 248, 250, 252;
+        --background-start-rgb: 15, 23, 42;
+        --background-end-rgb: 30, 41, 59;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+@media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-thumb {
+        background: #475569;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+}
+
+/* Prose styling for documentation */
+.prose {
+    max-width: 75ch;
+}
+
+.prose h1 {
+    @apply text-3xl font-bold mb-4 mt-8;
+}
+
+.prose h2 {
+    @apply text-2xl font-semibold mb-3 mt-6;
+}
+
+.prose h3 {
+    @apply text-xl font-semibold mb-2 mt-4;
+}
+
+.prose p {
+    @apply mb-4 leading-relaxed;
+}
+
+.prose code {
+    @apply bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+    @apply bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto mb-4;
+}
+
+.prose pre code {
+    @apply bg-transparent p-0;
+}
+
+.prose ul {
+    @apply list-disc pl-6 mb-4;
+}
+
+.prose ol {
+    @apply list-decimal pl-6 mb-4;
+}
+
+.prose li {
+    @apply mb-1;
+}
+
+.prose a {
+    @apply text-primary-600 hover:text-primary-700 underline;
+}
+
+.prose blockquote {
+    @apply border-l-4 border-primary-500 pl-4 italic my-4 text-slate-600 dark:text-slate-400;
+}
+
+/* Animation for streaming text */
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.cursor-blink::after {
+    content: '▋';
+    animation: blink 1s infinite;
+    color: #3b82f6;
+}
