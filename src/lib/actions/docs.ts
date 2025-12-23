@@ -1,7 +1,6 @@
 'use server';
 
 import { retrieveContext, RAGContext } from '@/lib/ai/rag';
-import { generateEmbedding } from '@/lib/ai/embeddings';
 import { insertDocumentChunk, getAllDocuments, getDocumentBySlug } from '@/lib/db/schema';
 
 // Server Action: Get relevant context for a user query
@@ -31,11 +30,11 @@ export async function addDocumentation(formData: FormData) {
     }
 
     try {
-        // Generate embedding for the content
-        const embedding = await generateEmbedding(content);
+        // Insert into database with dummy embedding (we use text search only)
+        const dummyEmbedding = new Array(1536).fill(0);
 
         // Insert into database
-        await insertDocumentChunk(title, content, slug, section, embedding);
+        await insertDocumentChunk(title, content, slug, section, dummyEmbedding);
 
         return { success: true };
     } catch (error) {
