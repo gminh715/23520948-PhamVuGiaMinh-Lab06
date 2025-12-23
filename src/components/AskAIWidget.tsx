@@ -181,7 +181,7 @@ export function AskAIWidget() {
 
                     {error && (
                         <div className="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-3 rounded-lg text-sm">
-                            {error.message.includes('Rate limit')
+                            {error.includes('Rate limit')
                                 ? '⏱️ Rate limit exceeded. Please wait a moment.'
                                 : '❌ Something went wrong. Please try again.'}
                         </div>
